@@ -8,15 +8,18 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
 import {LayoutComponent} from './components/layout/layout.component';
 import {WeatherForecastComponent} from './components/weather-forecast/weather-forecast.component';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbActiveModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {HeaderComponent} from './components/header/header.component';
+import {WeatherForecastHourlyChartModalComponent} from './components/weather-forecast-hourly-chart-modal/weather-forecast-hourly-chart-modal.component';
+import {NgChartsModule} from 'ng2-charts';
 
 @NgModule({
   declarations: [
     AppComponent,
     LayoutComponent,
     WeatherForecastComponent,
-    HeaderComponent
+    HeaderComponent,
+    WeatherForecastHourlyChartModalComponent
   ],
   imports: [
     BrowserModule,
@@ -24,9 +27,12 @@ import {HeaderComponent} from './components/header/header.component';
     HttpClientModule,
     RouterModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    NgChartsModule
   ],
-  providers: [],
+  providers: [
+    NgbActiveModal
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

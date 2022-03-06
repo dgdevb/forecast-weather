@@ -1,5 +1,22 @@
-<div class="weather-details">
-  <pre>Avg temp : {{weatherForecastService.averageTemperature$ | async }} °C</pre>
-  <pre>Name: {{location.name}}</pre>
-  <pre>Wind speed: {{windSpeed$ | async }} m/s</pre>
+<div class="weather-details" data-bs-toggle="modal" data-bs-target="#weatherDetailsModal" (click)="getWeatherForecastForNextHours()">
+  <div class="weather-details__city-name">
+    {{location.name}}
+  </div>
+  <div class="weather-details__temperature">
+    {{weatherForecastService.averageTemperature$ | async}} °C
+  </div>
+  <div class="weather-details__wind-speed">
+    Wind speed: {{weatherForecastService.windSpeed$ | async}} m/s
+  </div>
+  <div class="weather-details__weather-icon">
+    <ng-container [ngSwitch]="weatherForecastService.weatherType$ | async">
+      <i *ngSwitchCase="weatherType.Clear" class="bi bi-brightness-high"></i>
+      <i *ngSwitchCase="weatherType.Snow" class="bi bi-cloud-snow"></i>
+      <i *ngSwitchCase="weatherType.Clouds" class="bi bi-cloud"></i>
+      <i *ngSwitchCase="weatherType.Rain" class="bi bi-cloud-rain"></i>
+      <i *ngSwitchCase="weatherType.Drizzle" class="bi bi-cloud-drizzle"></i>
+      <i *ngSwitchCase="weatherType.Thunderstorm" class="bi bi-cloud-lightning-rain"></i>
+      <i *ngSwitchDefault class="bi bi-cloud-fog2"></i>
+    </ng-container>
+  </div>
 </div>

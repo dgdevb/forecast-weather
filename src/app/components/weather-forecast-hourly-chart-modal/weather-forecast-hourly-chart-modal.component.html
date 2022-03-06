@@ -1,0 +1,15 @@
+<div class="modal-header">
+  <h4 class="modal-title">Weather forecast for next 8 hours in {{locationName}}</h4>
+</div>
+<div class="modal-body">
+  <div class="chart-wrapper">
+    <canvas baseChart *ngIf="lineChartData"
+            [data]="lineChartData"
+            [options]="lineChartOptions"
+            [legend]="false"
+            [type]="lineChartType"></canvas>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-primary" (click)="activeModal.close()">Close</button>
+</div>

@@ -1,4 +1,4 @@
-import {Injectable, OnDestroy, OnInit} from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import {Observable, Subject, Subscription, timer} from 'rxjs';
 import {WeatherForecastSearchDto} from '../core/dto/weather-forecast-search.dto';
 import {WeatherForecastResponseDto} from '../core/dto/weather-forecast-response.dto';
@@ -7,11 +7,20 @@ import {CityLocationModel} from '../core/models/city-location.model';
 import {concatMap, map, tap} from 'rxjs/operators';
 
 @Injectable()
-export class WeatherForecastService implements OnInit, OnDestroy {
+export class WeatherForecastService implements OnDestroy {
 
   private location!: CityLocationModel;
   private weatherForecastSubject: Subject<WeatherForecastResponseDto> = new Subject<WeatherForecastResponseDto>();
   private subscription: Subscription = new Subscription();
+
+
+  weatherType$ = this.weatherForecastSubject.asObservable().pipe(
+    map(details => details.weather[0].main)
+  )
+
+  windSpeed$ = this.weatherForecastSubject.asObservable().pipe(
+    map(details => details.wind.speed)
+  )
 
   averageTemperature$: Observable<number> = this.weatherForecastSubject.asObservable().pipe(
     map(forecast => Math.floor((forecast.main.temp_max + forecast.main.temp_min) / 2))
@@ -19,13 +28,7 @@ export class WeatherForecastService implements OnInit, OnDestroy {
 
   forecastDetails$: Observable<WeatherForecastResponseDto> = this.weatherForecastSubject.asObservable();
 
-  // TODO forecast in next hours
-
   constructor(private weatherForecastApiService: WeatherForecastApiService) {
-  }
-
-  ngOnInit(): void {
-
   }
 
   ngOnDestroy(): void {
@@ -45,18 +48,20 @@ export class WeatherForecastService implements OnInit, OnDestroy {
     this.subscription.add(watcherSubscription);
   }
 
-  private refreshWeatherForecast$(): Observable<WeatherForecastResponseDto> {
-
-    if (!this.location) {
-      throw "Location not specified";
-    }
-
-    const weatherForecastSearchDto = {
+  getForecastSearchDto(): WeatherForecastSearchDto {
+    return {
       latitude: this.location.latitude,
       longitude: this.location.longitude
     } as WeatherForecastSearchDto;
+  }
 
-    return this.weatherForecastApiService.getActualWeatherForecast(weatherForecastSearchDto)
+  private refreshWeatherForecast$(): Observable<WeatherForecastResponseDto> {
+
+    if (!this.location) {
+      throw "Location not specified!";
+    }
+
+    return this.weatherForecastApiService.getActualWeatherForecast(this.getForecastSearchDto())
       .pipe(
         tap((forecast: WeatherForecastResponseDto) => this.weatherForecastSubject.next(forecast))
       );

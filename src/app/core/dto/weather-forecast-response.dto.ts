@@ -3,11 +3,7 @@ import {WeatherConditionDto} from './weather-condition.dto';
 import {WeatherWindDto} from './weather-wind.dto';
 
 export interface WeatherForecastResponseDto {
-  weather: WeatherConditionDto;
+  weather: WeatherConditionDto[];
   main: WeatherMainDto;
   wind: WeatherWindDto;
 }
-
-/// city name
-/// avg temp
-/// forecast in next hours

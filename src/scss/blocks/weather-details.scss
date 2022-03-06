@@ -1,0 +1,42 @@
+@import 'variables';
+
+.weather-details {
+  width: 300px;
+  height: 400px;
+  background: linear-gradient(to bottom right, $color-blue, $color-light-blue);
+  margin: 10px;
+  border-radius: 15px;
+  position: relative;
+  transition: box-shadow 0.3s;
+  color: $color-white;
+
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0 2px 22px -5px rgba(0, 0, 0, 1);
+  }
+
+  &__city-name {
+    height: 80px;
+    text-align: center;
+    font-size: 2rem;
+    padding-top: 15px;
+    font-weight: 600;
+  }
+
+  &__temperature {
+    font-size: 5rem;
+    text-align: center;
+  }
+
+  &__wind-speed {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  &__weather-icon {
+    margin-top: 5px;
+    font-size: 5rem;
+    text-align: center;
+  }
+
+}

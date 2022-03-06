@@ -1,14 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {WeatherForecastApiService} from '../../api-services/weather-forecast-api.service';
-import {WeatherForecastSearchDto} from '../../core/dto/weather-forecast-search.dto';
+import {Component} from '@angular/core';
 import {CityLocationModel} from '../../core/models/city-location.model';
 
 @Component({
   selector: 'dg-layout',
-  templateUrl: './layout.component.html',
-  styleUrls: ['./layout.component.scss']
+  templateUrl: './layout.component.html'
 })
-export class LayoutComponent implements OnInit {
+export class LayoutComponent {
 
   locations: CityLocationModel[] = [
     {name: 'Warsaw', longitude: 21.0122, latitude: 52.2297},
@@ -18,10 +15,5 @@ export class LayoutComponent implements OnInit {
     {name: 'Amsterdam', longitude: 4.8970, latitude: 52.3779}
   ];
 
-  constructor(private weatherForecastApiService: WeatherForecastApiService) {
-  }
-
-  ngOnInit(): void {
-  }
 }
 

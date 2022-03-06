@@ -1,0 +1,21 @@
+@import 'variables';
+
+.header-wrapper {
+  width: 100%;
+  height: 110px;
+  background-color: $color-blue;
+  margin-bottom: 80px;
+}
+
+.app-header {
+  color: $color-white;
+  height: 100%;
+  display: flex;
+  align-items: center;
+
+  &__app-name {
+    font-size: 2rem;
+    padding-left: 15px;
+  }
+
+}

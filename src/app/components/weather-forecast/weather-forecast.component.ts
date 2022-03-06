@@ -27,7 +27,7 @@ export class WeatherForecastComponent implements OnInit {
     this.weatherForecastService.initForecast(this.location);
   }
 
-  getWeatherForecastForNextHours(): void {
+  openWeatherForecastForNextHours(): void {
     this.weatherForecastApiService.getWeatherForecastForNextHours(this.weatherForecastService.getForecastSearchDto())
       .subscribe((response: WeatherForecastHourlyResponseDto) => {
         const modalRef = this.modalService.open(WeatherForecastHourlyChartModalComponent, {size: 'lg'});

@@ -9,10 +9,10 @@ import {concatMap, map, tap} from 'rxjs/operators';
 @Injectable()
 export class WeatherForecastService implements OnDestroy {
 
+  subscription: Subscription = new Subscription();
+
   private location!: CityLocationModel;
   private weatherForecastSubject: Subject<WeatherForecastResponseDto> = new Subject<WeatherForecastResponseDto>();
-  private subscription: Subscription = new Subscription();
-
 
   weatherType$ = this.weatherForecastSubject.asObservable().pipe(
     map(details => details.weather[0].main)

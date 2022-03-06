@@ -7,6 +7,14 @@ import {WeatherForecastHourlyResponseDto} from '../../core/dto/weather-forecast-
 import {WeatherForecastHourlyChartModalComponent} from '../weather-forecast-hourly-chart-modal/weather-forecast-hourly-chart-modal.component';
 import {WeatherTypeEnum} from '../../core/enums/weather-type.enum';
 
+/**
+ * WeatherForecastComponent has provider to WeatherForecastService, so there is one instance of that service for one instance of WeatherForecastComponent.
+ * That make component able to keep weather details fresh and easy to access to them.
+ *
+ * WeatherForecastComponent has public dependency weatherForecastService, so that we can use async pipes which reduce quantity of code.
+ * To show forecast details, there is NgbModal dependency which allow us to open NgBootstrap modal with details.
+ * */
+
 @Component({
   selector: 'dg-weather-forecast',
   templateUrl: './weather-forecast.component.html',

@@ -6,6 +6,13 @@ import {WeatherForecastApiService} from '../api-services/weather-forecast-api.se
 import {CityLocationModel} from '../core/models/city-location.model';
 import {concatMap, map, tap} from 'rxjs/operators';
 
+/**
+ * WeatherForecastService is responsible for keeping fresh weather forecast.
+ * It has a timer which refresh weather data.
+ * There are observables with weather forecast based on subject with weather forecast details. Subject and observables make us sure to be notified when weather get refreshed.
+ * Service is not a singleton, It is like a helper for component displaying weather forecast. Service is focused only for one location provided by host component.
+ * */
+
 @Injectable()
 export class WeatherForecastService implements OnDestroy {
 
@@ -25,8 +32,6 @@ export class WeatherForecastService implements OnDestroy {
   averageTemperature$: Observable<number> = this.weatherForecastSubject.asObservable().pipe(
     map(forecast => Math.floor((forecast.main.temp_max + forecast.main.temp_min) / 2))
   );
-
-  forecastDetails$: Observable<WeatherForecastResponseDto> = this.weatherForecastSubject.asObservable();
 
   constructor(private weatherForecastApiService: WeatherForecastApiService) {
   }

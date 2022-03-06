@@ -9,6 +9,8 @@
     "test": "ng test",
     "lint": "ng lint"
   },
+  "author": "Daniel Gutowski",
+  "license": "MIT",
   "private": true,
   "dependencies": {
     "@angular/animations": "~13.2.4",
